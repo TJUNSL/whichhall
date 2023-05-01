@@ -37,7 +37,7 @@ function geteat(choice) {
     const { floor, window } = wind[hall][Math.floor(Math.random() * Object.keys(wind[hall]).length)];
     const win = window[Math.floor(Math.random() * window.length)];
     document.getElementById('knoweat').innerHTML = `${hall}@${floor}：${win}`.replace(/[\@：]无数据/g, '');
-  }
+}
 
 function handleHallSelection() {
     const halls = document.querySelectorAll('input[name="hall"]:checked');
@@ -50,3 +50,15 @@ const inputElements = document.querySelectorAll('input[name="hall"]');
 inputElements.forEach((inputElement) => {
     inputElement.addEventListener('change', handleHallSelection);
 });
+
+function share() {
+    if (!navigator.share) {
+        alert("该页面暂不支持分享");
+    } else {
+        navigator.share({
+            title: window.location.title,
+            url: window.location.href,
+            text: document.getElementById('knoweat').innerHTML
+        });
+    }
+}
